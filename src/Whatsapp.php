@@ -46,7 +46,7 @@ Class Whatsapp {
 		
 		if (json_decode($this->result,true)['error'] == 0) {
 			$wa = new Wa();
-			$wa->telf = $this->telf;
+			$wa->telf = $nume;
 			$wa->txt = $this->txt;
 			$wa->img = $this->img;
 			$wa->aud = $this->aud;			
