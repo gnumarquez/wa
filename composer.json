@@ -20,7 +20,7 @@
      "extra": {
         "laravel": {
             "providers": [
-                "Gnumarquez\\wa\\WaServiceProvider"
+                "Gnumarquez\\WaServiceProvider"
             ]
         }
     }
