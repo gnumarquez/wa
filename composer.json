@@ -8,7 +8,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Gnumarquez\\Wa\\": "src/"
+            "Gnumarquez\\": "src/"
         }
     },
     "authors": [
@@ -20,13 +20,8 @@
      "extra": {
         "laravel": {
             "providers": [
-                "Gnumarquez\\wa\\WaServiceProvider"
+                "Gnumarquez\\WaServiceProvider"
             ]
-        }
-    },
-     "autoload": {
-        "psr-4": {  
-            "Gnumarquez\\wa\\": "src/"
         }
     }
 }

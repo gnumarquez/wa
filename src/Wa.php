@@ -1,5 +1,5 @@
 <?php
-namespace Gnumarquez
+namespace Gnumarquez;
 
 Class Wa {
 
