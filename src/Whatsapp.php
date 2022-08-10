@@ -33,7 +33,7 @@ Class Whatsapp {
 			'img'=>$this->img,
 			'aud'=>$this->aud,
 			'mp4'=>$this->mp4,
-			'pdf'=>$pdf
+			'pdf'=>$this->pdf
 		);
 
 		$ch = curl_init();
@@ -48,10 +48,11 @@ Class Whatsapp {
 			$wa = new Wa();
 			$wa->telf = $this->tlf;
 			$wa->txt = $this->txt;
-			$wa->img = $this->img;			
+			$wa->img = $this->img;
 			$wa->aud = $this->aud;			
-			$wa->mp4 = $this->mp4;			
-			$wa->pdf = $this->pdf;			
+			$wa->mp4 = $this->mp4;
+			$wa->pdf = $this->pdf;
+			$wa->status = 0;
 			$wa->save();
 			return true;
 		} else {
