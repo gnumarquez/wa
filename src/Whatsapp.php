@@ -8,13 +8,13 @@ use Gnumarquez\models\Whatsapp as Wa;
 
 Class Whatsapp {
 
-	public $telf = "";
-	public $txt = "";	
-	public $img = "";
-	public $pdf = "";
-	public $aud = "";
-	public $mp4 = "";
-	public $result = "";
+	public $telf = null;
+	public $txt = null;	
+	public $img = null;
+	public $pdf = null;
+	public $aud = null;
+	public $mp4 = null;
+	public $result = null;
 
 	public function send(){
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
