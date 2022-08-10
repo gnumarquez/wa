@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("aud")->nullable();
             $table->string("pdf")->nullable();
             $table->string("mp4")->nullable();
-            $table->tinyInteger("state")->default(0);
+            $table->tinyInteger("status")->default(0);
             $table->timestamps();
         });
     }

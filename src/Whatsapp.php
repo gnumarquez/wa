@@ -52,7 +52,6 @@ Class Whatsapp {
 			$wa->aud = $this->aud;			
 			$wa->mp4 = $this->mp4;
 			$wa->pdf = $this->pdf;
-			$wa->status = 0;
 			$wa->save();
 			return true;
 		} else {
