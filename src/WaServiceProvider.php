@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnumarquez\wa;
+namespace Gnumarquez;
 
 use Illuminate\Support\ServiceProvider;
 

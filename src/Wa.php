@@ -1,7 +1,7 @@
 <?php
 namespace Gnumarquez;
 
-Class Wa {
+Class Whatsapp {
 
 	public function send(){
 		return "test";
