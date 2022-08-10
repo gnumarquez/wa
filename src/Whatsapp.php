@@ -3,7 +3,7 @@
 namespace Gnumarquez;
 
 use Brick\PhoneNumber\PhoneNumber;
-use App\Models\Whatsapp as Wa;
+use Gnumarquez\models\Whatsapp as Wa;
 
 
 Class Whatsapp {
