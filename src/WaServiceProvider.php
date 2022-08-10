@@ -24,7 +24,6 @@ class WaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrations();
-        $this->loadModels();
     }
 
     private function loadMigrations(): void
@@ -32,8 +31,4 @@ class WaServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
     }
 
-    private function loadModels(): void
-    {
-        $this->loadModelsFrom(__DIR__ . '/models');
-    }
 }
