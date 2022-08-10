@@ -1,0 +1,32 @@
+{
+    "name": "gnumarquez/wa",
+    "description": "Send messages with api whatsapp506",
+    "type": "library",
+    "require": {
+        "brick/phonenumber": "^0.4.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gnumarquez\\Wa\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wilmer Márquez",
+            "email": "gnumarquez@gmail.com"
+        }
+    ],
+     "extra": {
+        "laravel": {
+            "providers": [
+                "Gnumarquez\\wa\\WaServiceProvider"
+            ]
+        }
+    },
+     "autoload": {
+        "psr-4": {  
+            "Gnumarquez\\wa\\": "src/"
+        }
+    }
+}
