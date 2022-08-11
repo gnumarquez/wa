@@ -24,6 +24,10 @@ Class Whatsapp {
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
 		if (empty($this->txt) && empty($this->img) && empty($this->pdf) && empty($this->aud) && empty($this->mp4)) throw new \ErrorException('Falta texto y/o documentos');
 
+		if (strlen($this->telf)==8){
+			//cr
+			$this->telf = "+506".$this->telf;
+		}
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
