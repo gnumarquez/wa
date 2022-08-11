@@ -67,6 +67,25 @@ Class Whatsapp {
 			}			
 			return true;
 		} else {
+			$error = [
+				0 => "Mensaje enviado",
+				1 => "Api Key ausente",
+				2 => "Código Telefónico Internacional ausente",
+				3 => "Número Telefónico ausente",
+				4 => "Texto, Imágen y PSD ausente",
+				10 => "Api Key incorrecta",
+				11 => "Sin saldo",
+				21 => "Código Telefónico Internacional no numérico",
+				31 => "Número Telefónico no numérico",
+				41 => "Texto demasiado largo",
+				51 => "Url de imágen no correcta",
+				52 => "Imágen no jpeg",
+				53 => "Tamaño imágen demasiado grande",
+				61 => "Url de PDF no correcto",
+				62 => "Documento no PDF",
+				63 => "Documento demasiado grande"
+			];
+			\Log::error($this->telf." - ".$error[json_decode($this->result,true)['error']]);
 			return false;
 		}
 	}
