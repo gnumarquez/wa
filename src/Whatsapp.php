@@ -23,6 +23,8 @@ Class Whatsapp {
 	public function send(){
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
 		if (empty($this->txt) && empty($this->img) && empty($this->pdf) && empty($this->aud) && empty($this->mp4)) throw new \ErrorException('Falta texto y/o documentos');
+		$api = env('WHATSAPP_APIKEY');
+		if (empty($api)) throw new \ErrorException('Falta configurar la variable WHATSAPP_APIKEY');
 
 		if (strlen($this->telf)==8){
 			//cr
