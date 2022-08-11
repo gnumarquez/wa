@@ -28,7 +28,7 @@ Class Whatsapp {
 
 		if (strlen($this->telf)==8){
 			//cr
-			$this->telf = "+506".$this->telf;
+			$this->telf = "506".$this->telf;
 		}
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
@@ -57,7 +57,7 @@ Class Whatsapp {
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
 				$wa = new Wa();
-				$wa->telf = $nume;
+				$wa->telf = $this->telf;
 				$wa->txt = $this->txt;
 				$wa->img = $this->img;
 				$wa->aud = $this->aud;			
@@ -107,7 +107,7 @@ Class Whatsapp {
 		}
 
 		$wa = new Wa();
-		$wa->telf = "+".$data['telf'];
+		$wa->telf = $data['telf'];
 		$wa->txt = $data['txt'] ?? null;
 		$wa->img = $data['img'] ?? null;
 		$wa->aud = $data['aud'] ?? null;			
