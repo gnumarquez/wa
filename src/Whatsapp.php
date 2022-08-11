@@ -3,7 +3,7 @@
 namespace Gnumarquez;
 
 use Brick\PhoneNumber\PhoneNumber;
-use Gnumarquez\models\Whatsapp as Wa;
+use App\Models\WhatsappModel as Wa;
 
 
 Class Whatsapp {
@@ -69,6 +69,49 @@ Class Whatsapp {
 		} else {
 			return false;
 		}
+	}
+
+	public function receive($data){
+		
+		$this->telf = $data['telf'];
+
+		foreach ($data as $key => $value) {
+            if ($value == "none") {          
+                $data[$key] = null;
+            }
+        }
+
+		foreach (["img","aud","mp4","pdf"] as $i) {
+			if (!empty($data[$i])) {
+				$data[$i] = $this->attach($data[$i]);
+			}
+		}
+
+		$wa = new Wa();
+		$wa->telf = "+".$data['telf'];
+		$wa->txt = $data['txt'] ?? null;
+		$wa->img = $data['img'] ?? null;
+		$wa->aud = $data['aud'] ?? null;			
+		$wa->mp4 = $data['mp4'] ?? null;
+		$wa->pdf = $data['pdf'] ?? null;
+		$wa->status = 1;
+		$wa->save();
+		
+	}
+
+	private  function attach($doc) {
+		$url = \Request::root();
+		$options=array(
+			"ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false,
+			),
+		); 
+		$contents = file_get_contents($doc, false, stream_context_create($options));
+		$ext = pathinfo($doc)['extension'];
+		$name = "$this->telf/".bin2hex(random_bytes(20)).".$ext";
+		\Storage::disk('public')->put($name,$contents);
+		return "$url/storage/$name";
 	}
 }
 

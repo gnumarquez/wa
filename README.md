@@ -3,8 +3,13 @@
 Instalación
 <pre>
 composer install gnumarquez/wa
-php artisan migrate <----- Opcional solo si deseas generar la tabla para almacenar los whatsapp
 </pre>
+El siguiente paso genera el job, modelo, y migración para almacenar whatsapp, es opcional solo si quieres guardar los whatsapp en base de datos
+<pre>
+php artisan vendor:publish --provider=Gnumarquez\WaServiceProvider
+php artisan migrate
+</pre>
+
 Configuración
 
 Configurar en tu .env la la apikey de whatsapp

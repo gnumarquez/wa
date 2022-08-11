@@ -24,11 +24,25 @@ class WaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrations();
+        $this->loadPublishes();
     }
 
     private function loadMigrations(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
+    }
+
+    private function loadPublishes(): void
+    {
+        $this->publishes([
+            __DIR__.'/jobs/' => app_path('Jobs'),
+        ],'JobsWa' );
+        $this->publishes([
+            __DIR__.'/models/' => app_path('Models'),
+        ],'ModelsWa' );
+         $this->publishes([
+            __DIR__.'/migrations/' => database_path('migrations'),
+        ],'MigrationsWa' );
     }
 
 }

@@ -23,5 +23,10 @@
                 "Gnumarquez\\WaServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan vendor:publish --tag=ModelsWa"
+        ]
     }
 }
