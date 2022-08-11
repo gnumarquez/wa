@@ -15,7 +15,11 @@ Class Whatsapp {
 	public $aud = null;
 	public $mp4 = null;
 	public $result = null;
+	private $save;
 
+	public function __construct($save = true) {
+		$this->save = $save;
+	}
 	public function send(){
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
 		if (empty($this->txt) && empty($this->img) && empty($this->pdf) && empty($this->aud) && empty($this->mp4)) throw new \ErrorException('Falta texto y/o documentos');
@@ -45,14 +49,16 @@ Class Whatsapp {
 		curl_close ($ch);
 		
 		if (json_decode($this->result,true)['error'] == 0) {
-			$wa = new Wa();
-			$wa->telf = $nume;
-			$wa->txt = $this->txt;
-			$wa->img = $this->img;
-			$wa->aud = $this->aud;			
-			$wa->mp4 = $this->mp4;
-			$wa->pdf = $this->pdf;
-			$wa->save();
+			if ($this->save) {
+				$wa = new Wa();
+				$wa->telf = $nume;
+				$wa->txt = $this->txt;
+				$wa->img = $this->img;
+				$wa->aud = $this->aud;			
+				$wa->mp4 = $this->mp4;
+				$wa->pdf = $this->pdf;
+				$wa->save();
+			}			
 			return true;
 		} else {
 			return false;
