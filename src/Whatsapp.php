@@ -119,7 +119,7 @@ Class Whatsapp {
 	}
 
 	private  function attach($doc) {
-		$url = \Request::root();
+		$url = request()->getSchemeAndHttpHost();
 		$options=array(
 			"ssl"=>array(
 				"verify_peer"=>false,
