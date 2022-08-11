@@ -119,7 +119,16 @@ Class Whatsapp {
 	}
 
 	private  function attach($doc) {
-		$url = request()->getSchemeAndHttpHost();
+		if (preg_match("/^http/",env("APP_URL"))) {
+			$url = env("APP_URL");
+		} else {
+			if (env("APP_URL")=="localhost"){
+				$url = "http://localhost";
+			} else {
+				$url = "https://".env("APP_URL");
+			}
+		}
+		
 		$options=array(
 			"ssl"=>array(
 				"verify_peer"=>false,
