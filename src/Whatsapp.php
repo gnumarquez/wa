@@ -15,6 +15,7 @@ Class Whatsapp {
 	public $aud = null;
 	public $mp4 = null;
 	public $result = null;
+	public $array = [];
 	private $save;
 
 	public function __construct($save = true) {
@@ -33,18 +34,21 @@ Class Whatsapp {
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
-		$api = env('WHATSAPP_APIKEY');
-
-		$data = array(
-			'api'=>$api,
-			'cod'=>$number->getCountryCode(),
-			'pho'=>$number->getNationalNumber(),
-			'txt'=>$this->txt,
-			'img'=>$this->img,
-			'aud'=>$this->aud,
-			'mp4'=>$this->mp4,
-			'pdf'=>$this->pdf
-		);
+		if (empty($this->array)) {
+			$data = array(
+				'cod'=>$number->getCountryCode(),
+				'pho'=>$number->getNationalNumber(),
+				'txt'=>$this->txt,
+				'img'=>$this->img,
+				'aud'=>$this->aud,
+				'mp4'=>$this->mp4,
+				'pdf'=>$this->pdf
+			);
+		} else {
+			$data = $this->array
+		}
+		$data['api'] = $api;
+		
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,"https://api.whatsapp506.biz/sendOne");
