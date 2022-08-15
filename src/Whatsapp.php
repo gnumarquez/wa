@@ -30,6 +30,9 @@ Class Whatsapp {
 			//cr
 			$this->telf = "506".$this->telf;
 		}
+
+		$this->telf = preg_replace("/^\+/","",$this->telf);
+
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
