@@ -30,7 +30,7 @@ class WaServiceProvider extends ServiceProvider
 
     private function loadMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/migrations');
     }
 
     private function loadPublishes(): void
