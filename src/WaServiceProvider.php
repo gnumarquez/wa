@@ -25,6 +25,7 @@ class WaServiceProvider extends ServiceProvider
     {
         $this->loadMigrations();
         $this->loadPublishes();
+        $this->registerCommands();
     }
 
     private function loadMigrations(): void
@@ -40,9 +41,17 @@ class WaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/models/' => app_path('Models'),
         ],'ModelsWa' );
-         $this->publishes([
+       /*  $this->publishes([
             __DIR__.'/migrations/' => database_path('migrations'),
-        ],'MigrationsWa' );
+        ],'MigrationsWa' );*/
+    }
+    protected function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\InstallCommand::class,
+            ]);
+        }
     }
 
 }

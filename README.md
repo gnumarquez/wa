@@ -4,10 +4,9 @@ Instalación
 <pre>
 composer install gnumarquez/wa
 </pre>
-El siguiente paso genera el job, modelo, y migración para almacenar whatsapp, es opcional solo si quieres guardar los whatsapp en base de datos
+El siguiente paso genera el job, modelo, y migración para almacenar whatsapp
 <pre>
-php artisan vendor:publish --provider=Gnumarquez\WaServiceProvider
-php artisan migrate
+php artisan whatsapp:install
 </pre>
 
 Configuración
@@ -20,7 +19,7 @@ Uso
 
 <pre>
 
- use Gnumarquez\Whatsapp;
+use Gnumarquez\Whatsapp;
 
 $wa = new Whatsapp();    
 $wa->telf = "12345678";
