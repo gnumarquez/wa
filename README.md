@@ -31,7 +31,19 @@ $wa->pdf = "https://url"; '<--- Opcional
 $wa->send();
 </pre>
     
-Por defecto se guardaran los mensajes automáticamente en la base de datos en la tabla whatsapp, si no quiers que se guarden mensajes en la base de datos debes instanciar la clase con el parametro <b>FALSE</b>
+Por defecto se guardaran los mensajes automáticamente en la base de datos en la tabla whatsapp, si no quieres que se guarden mensajes en la base de datos debes instanciar la clase con el parametro <b>FALSE</b>
 <pre>
 $wa = new Whatsapp(false);<
+</pre>
+
+Puedes utilizar el Job para que el envío se realice en segundo plano
+<pre>
+use App\Jobs\Sendwa;
+
+$array = [
+    "telf"=>"12345678",
+    "txt"=>"Mensaje"
+];
+
+Sendwa::dispatch($array);
 </pre>
