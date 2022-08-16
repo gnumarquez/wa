@@ -30,7 +30,7 @@ class InstallCommand extends Command
     {
         $this->comment('Instalando Gnumarquez/Whatsapp...');
         $this->callSilent('vendor:publish', ['--provider'=>'Gnumarquez\WaServiceProvider']);
-        $this->callSilent('migrate', ['--path'=>'vendor/gnumarquez/wa/src/migrations']);
+        //$this->callSilent('migrate', ['--path'=>'vendor/gnumarquez/wa/src/migrations']);
         //$this->callSilent('migrate');
         $this->info('Whatsapp506 instalado correctamente.');
     }

@@ -8,7 +8,10 @@ El siguiente paso genera el job, modelo, y migración para almacenar whatsapp
 <pre>
 php artisan whatsapp:install
 </pre>
-
+Modifica el de ser necesario el nombre de la tabla tanto en la migración como en el modelo WhatsapModel.php
+<pre>
+php artisan migrate
+</pre>
 Configuración
 
 Configurar en tu .env la la apikey de whatsapp
