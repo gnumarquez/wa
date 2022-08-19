@@ -140,7 +140,7 @@ Class Whatsapp {
 		$ext = pathinfo($doc)['extension'];
 		$name = "$this->telf/".bin2hex(random_bytes(20)).".$ext";
 		\Storage::disk('public')->put($name,$contents);
-		return "$url/storage/$name";
+		return "/storage/$name";
 	}
 }
 
