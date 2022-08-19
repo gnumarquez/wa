@@ -43,6 +43,7 @@ class Sendwa implements ShouldQueue
         $wa->aud = $data['aud'] ?? null;			
         $wa->mp4 = $data['mp4'] ?? null;
         $wa->pdf = $data['pdf'] ?? null;
+        $wa->sender = $data['sender'] ?? null;
 
         $wa->send();
     }

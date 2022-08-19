@@ -14,6 +14,7 @@ Class Whatsapp {
 	public $pdf = null;
 	public $aud = null;
 	public $mp4 = null;
+	public $sender = null;
 	public $result = null;
 	private $save;
 
@@ -64,6 +65,7 @@ Class Whatsapp {
 				$wa->aud = $this->aud;			
 				$wa->mp4 = $this->mp4;
 				$wa->pdf = $this->pdf;
+				$wa->sender = $this->sender;
 				$wa->save();
 			}			
 			return true;
