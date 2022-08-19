@@ -2,7 +2,7 @@
 
 Instalación
 <pre>
-composer install gnumarquez/wa
+composer require gnumarquez/wa
 </pre>
 El siguiente paso genera el job, modelo, y migración para almacenar whatsapp
 <pre>
