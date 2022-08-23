@@ -89,7 +89,7 @@ Class Whatsapp {
 				62 => "Documento no PDF",
 				63 => "Documento demasiado grande"
 			];
-			$this->error = $error[json_decode($this->result,true)['error'];
+			$this->error = $error[json_decode($this->result,true)['error']];
 			\Log::error($this->telf." - ".$error[json_decode($this->result,true)['error']]);
 			return false;
 		}
