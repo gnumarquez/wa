@@ -16,6 +16,7 @@ Class Whatsapp {
 	public $mp4 = null;
 	public $sender = null;
 	public $result = null;
+	public $error = null;
 	private $save;
 
 	public function __construct($save = true) {
@@ -88,6 +89,7 @@ Class Whatsapp {
 				62 => "Documento no PDF",
 				63 => "Documento demasiado grande"
 			];
+			$this->error = $error[json_decode($this->result,true)['error'];
 			\Log::error($this->telf." - ".$error[json_decode($this->result,true)['error']]);
 			return false;
 		}
