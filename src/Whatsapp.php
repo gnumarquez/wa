@@ -17,6 +17,7 @@ Class Whatsapp {
 	public $sender = null;
 	public $result = null;
 	public $error = null;
+	public $apiKey = null;
 	private $save;
 
 	public function __construct($save = true) {
@@ -25,14 +26,16 @@ Class Whatsapp {
 	public function send(){
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
 		if (empty($this->txt) && empty($this->img) && empty($this->pdf) && empty($this->aud) && empty($this->mp4)) throw new \ErrorException('Falta texto y/o documentos');
-		$api = env('WHATSAPP_APIKEY');
+
+		$api = is_null($this->apiKey) ? env('WHATSAPP_APIKEY'):$this->apiKey;
+		
 		if (empty($api)) throw new \ErrorException('Falta configurar la variable WHATSAPP_APIKEY');
 
 		if (strlen($this->telf)==8){
 			//cr
 			$this->telf = "506".$this->telf;
 		}
-
+//test
 		$this->telf = preg_replace("/^\+/","",$this->telf);
 
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
