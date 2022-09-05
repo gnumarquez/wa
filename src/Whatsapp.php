@@ -18,6 +18,7 @@ Class Whatsapp {
 	public $result = null;
 	public $error = null;
 	public $apiKey = null;
+	public $status = 0;
 	private $save;
 
 	public function __construct($save = true) {
@@ -41,24 +42,29 @@ Class Whatsapp {
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
-		$data = array(
-			'api'=>$api,
-			'cod'=>$number->getCountryCode(),
-			'pho'=>$number->getNationalNumber(),
-			'txt'=>$this->txt,
-			'img'=>$this->img,
-			'aud'=>$this->aud,
-			'mp4'=>$this->mp4,
-			'pdf'=>$this->pdf
-		);
+		if ($this->status == "3" {
+			$this->result = json_encode(["error"=>0]);
+		} else {
+			$data = array(
+				'api'=>$api,
+				'cod'=>$number->getCountryCode(),
+				'pho'=>$number->getNationalNumber(),
+				'txt'=>$this->txt,
+				'img'=>$this->img,
+				'aud'=>$this->aud,
+				'mp4'=>$this->mp4,
+				'pdf'=>$this->pdf
+			);
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL,"https://api.whatsapp506.biz/sendOne");
-		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$this->result = curl_exec ($ch);
-		curl_close ($ch);
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL,"https://api.whatsapp506.biz/sendOne");
+			curl_setopt($ch, CURLOPT_POST, TRUE);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$this->result = curl_exec ($ch);
+			curl_close ($ch);
+		}
+		
 		
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
@@ -69,6 +75,7 @@ Class Whatsapp {
 				$wa->aud = $this->aud;			
 				$wa->mp4 = $this->mp4;
 				$wa->pdf = $this->pdf;
+				$wa->status = $this->status;
 				$wa->sender = $this->sender;
 				$wa->save();
 			}			
