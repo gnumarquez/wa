@@ -42,7 +42,7 @@ Class Whatsapp {
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
-		if ($this->status == "3" {
+		if ($this->status == "3") {
 			$this->result = json_encode(["error"=>0]);
 		} else {
 			$data = array(
