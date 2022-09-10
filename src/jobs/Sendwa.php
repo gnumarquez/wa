@@ -38,6 +38,7 @@ class Sendwa implements ShouldQueue
         $wa = new Whatsapp();
         
         $wa->telf = $data['telf'];
+        $wa->api = $data['apiKey'] ?? null;
         $wa->txt = $data['txt'] ?? null;
         $wa->img = $data['img'] ?? null;
         $wa->aud = $data['aud'] ?? null;			
