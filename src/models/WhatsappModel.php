@@ -11,5 +11,5 @@ class WhatsappModel extends Model
 
     protected $table = 'whatsapp';
 
-    protected $fillable = ["txt","telf","img","aud","pdf","mp4","status"];
+    protected $fillable = ["txt","telf","img","aud","pdf","mp4","status","sender"];
 }
