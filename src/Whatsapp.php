@@ -20,9 +20,11 @@ Class Whatsapp {
 	public $apiKey = null;
 	public $status = 0;
 	private $save;
+	public $arr = null;
 
 	public function __construct($save = true,$arr = null) {
 		$this->save = $save;
+		$this->arr = $arr;
 	}
 	public function send(){
 		if (empty($this->telf)) throw new \ErrorException('Falta número');
@@ -68,7 +70,7 @@ Class Whatsapp {
 		
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
-				if (!$arr) {
+				if (!$this->arr) {
 					$wa = new \App\Models\WhatsappModel();
 					$wa->telf = $this->telf;
 					$wa->txt = $this->txt;
@@ -127,7 +129,7 @@ Class Whatsapp {
 			}
 		}
 
-		if (!$arr) {
+		if (!$this->arr) {
 			$wa = new \App\Models\WhatsappModel();
 			$wa->telf = $data['telf'];
 			$wa->txt = $data['txt'] ?? null;
