@@ -22,7 +22,7 @@ Class Whatsapp {
 	public $status = 0;
 	private $save;
 
-	public function __construct($save = true,$db, $user,$pass,$host = "localhost") {
+	public function __construct($save = true,$arr = null) {
 		$this->save = $save;
 	}
 	public function send(){
@@ -69,19 +69,22 @@ Class Whatsapp {
 		
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
-
-				/*$wa = new Wa();
-				$wa->telf = $this->telf;
-				$wa->txt = $this->txt;
-				$wa->img = $this->img;
-				$wa->aud = $this->aud;			
-				$wa->mp4 = $this->mp4;
-				$wa->pdf = $this->pdf;
-				$wa->status = $this->status;
-				$wa->sender = $this->sender;
-				$wa->save();*/
-				$db = new DB($db, $user, $pass, $host);
-				$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status,sender) values (?,?,?,?,?,?,?,?)",[$this->telf,$this->txt,$this->img,$this->aud,$this->mp4,$this->pdf,$this->status,$this->sender]);
+				if (!$arr) {
+					$wa = new Wa();
+					$wa->telf = $this->telf;
+					$wa->txt = $this->txt;
+					$wa->img = $this->img;
+					$wa->aud = $this->aud;			
+					$wa->mp4 = $this->mp4;
+					$wa->pdf = $this->pdf;
+					$wa->status = $this->status;
+					$wa->sender = $this->sender;
+					$wa->save();
+				} else {
+					$db = new DB($arr["db"], $arr["user"], $arr["pass"], $arr["host"]);
+					$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status,sender) values (?,?,?,?,?,?,?,?)",[$this->telf,$this->txt,$this->img,$this->aud,$this->mp4,$this->pdf,$this->status,$this->sender]);
+				}
+				
 			}			
 			return true;
 		} else {
@@ -125,19 +128,21 @@ Class Whatsapp {
 			}
 		}
 
-		/*
-		$wa = new Wa();
-		$wa->telf = $data['telf'];
-		$wa->txt = $data['txt'] ?? null;
-		$wa->img = $data['img'] ?? null;
-		$wa->aud = $data['aud'] ?? null;			
-		$wa->mp4 = $data['mp4'] ?? null;
-		$wa->pdf = $data['pdf'] ?? null;
-		$wa->status = 1;
-		$wa->save();
-		*/
-		$db = new DB($db, $user, $pass, $host);
-		$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status) values (?,?,?,?,?,?,?)",[$data['telf'],$data['txt'],$data['img'],$data['aud'],$data['mp4'],$data['pdf'],1]);
+		if (!$arr) {
+			$wa = new Wa();
+			$wa->telf = $data['telf'];
+			$wa->txt = $data['txt'] ?? null;
+			$wa->img = $data['img'] ?? null;
+			$wa->aud = $data['aud'] ?? null;			
+			$wa->mp4 = $data['mp4'] ?? null;
+			$wa->pdf = $data['pdf'] ?? null;
+			$wa->status = 1;
+			$wa->save();
+		} else {
+			$db = new DB($arr["db"], $arr["user"], $arr["pass"], $arr["host"]);
+			$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status) values (?,?,?,?,?,?,?)",[$data['telf'],$data['txt'],$data['img'],$data['aud'],$data['mp4'],$data['pdf'],1]);
+		}
+			
 		
 	}
 
