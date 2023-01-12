@@ -4,6 +4,7 @@ namespace Gnumarquez;
 
 use Brick\PhoneNumber\PhoneNumber;
 use App\Models\WhatsappModel as Wa;
+use Gnumarquez\DB;
 
 
 Class Whatsapp {
@@ -21,7 +22,7 @@ Class Whatsapp {
 	public $status = 0;
 	private $save;
 
-	public function __construct($save = true) {
+	public function __construct($save = true,$db, $user,$pass,$host = "localhost") {
 		$this->save = $save;
 	}
 	public function send(){
@@ -68,7 +69,8 @@ Class Whatsapp {
 		
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
-				$wa = new Wa();
+
+				/*$wa = new Wa();
 				$wa->telf = $this->telf;
 				$wa->txt = $this->txt;
 				$wa->img = $this->img;
@@ -77,7 +79,9 @@ Class Whatsapp {
 				$wa->pdf = $this->pdf;
 				$wa->status = $this->status;
 				$wa->sender = $this->sender;
-				$wa->save();
+				$wa->save();*/
+				$db = new DB($db, $user, $pass, $host);
+				$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status,sender) values (?,?,?,?,?,?,?,?)",[$this->telf,$this->txt,$this->img,$this->aud,$this->mp4,$this->pdf,$this->status,$this->sender]);
 			}			
 			return true;
 		} else {
@@ -100,12 +104,12 @@ Class Whatsapp {
 				63 => "Documento demasiado grande"
 			];
 			$this->error = $error[json_decode($this->result,true)['error']];
-			\Log::error($this->telf." - ".$error[json_decode($this->result,true)['error']]);
+			error_log($this->telf." - ".$error[json_decode($this->result,true)['error']]);
 			return false;
 		}
 	}
 
-	public function receive($data){
+	public function receive($data,$url = null){
 		
 		$this->telf = $data['telf'];
 
@@ -117,10 +121,11 @@ Class Whatsapp {
 
 		foreach (["img","aud","mp4","pdf"] as $i) {
 			if (!empty($data[$i])) {
-				$data[$i] = $this->attach($data[$i]);
+				$data[$i] = $this->attach($data[$i],$url);
 			}
 		}
 
+		/*
 		$wa = new Wa();
 		$wa->telf = $data['telf'];
 		$wa->txt = $data['txt'] ?? null;
@@ -130,19 +135,25 @@ Class Whatsapp {
 		$wa->pdf = $data['pdf'] ?? null;
 		$wa->status = 1;
 		$wa->save();
+		*/
+		$db = new DB($db, $user, $pass, $host);
+		$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status) values (?,?,?,?,?,?,?)",[$data['telf'],$data['txt'],$data['img'],$data['aud'],$data['mp4'],$data['pdf'],1]);
 		
 	}
 
-	private  function attach($doc) {
-		if (preg_match("/^http/",env("APP_URL"))) {
-			$url = env("APP_URL");
-		} else {
-			if (env("APP_URL")=="localhost"){
-				$url = "http://localhost";
+	private  function attach($doc,$url) {
+		if (!$url) {
+			if (preg_match("/^http/",env("APP_URL"))) {
+				$url = env("APP_URL");
 			} else {
-				$url = "https://".env("APP_URL");
+				if (env("APP_URL")=="localhost"){
+					$url = "http://localhost";
+				} else {
+					$url = "https://".env("APP_URL");
+				}
 			}
 		}
+		
 		
 		$options=array(
 			"ssl"=>array(
@@ -153,7 +164,15 @@ Class Whatsapp {
 		$contents = file_get_contents($doc, false, stream_context_create($options));
 		$ext = pathinfo($doc)['extension'];
 		$name = "$this->telf/".bin2hex(random_bytes(20)).".$ext";
-		\Storage::disk('public')->put($name,$contents);
+
+		$filename = "./storage/".$name;
+
+		if(!is_dir(dirname($filename))) mkdir(dirname($filename).'/', 0777, TRUE);
+
+		file_put_contents($filename, file_get_contents($url))
+
+		//\Storage::disk('public')->put($name,$contents);
+
 		return "/storage/$name";
 	}
 }
