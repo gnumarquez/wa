@@ -3,7 +3,6 @@
 namespace Gnumarquez;
 
 use Brick\PhoneNumber\PhoneNumber;
-use App\Models\WhatsappModel as Wa;
 use Gnumarquez\DB;
 
 
@@ -70,7 +69,7 @@ Class Whatsapp {
 		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
 				if (!$arr) {
-					$wa = new Wa();
+					$wa = new \App\Models\WhatsappModel();
 					$wa->telf = $this->telf;
 					$wa->txt = $this->txt;
 					$wa->img = $this->img;
@@ -129,7 +128,7 @@ Class Whatsapp {
 		}
 
 		if (!$arr) {
-			$wa = new Wa();
+			$wa = new \App\Models\WhatsappModel();
 			$wa->telf = $data['telf'];
 			$wa->txt = $data['txt'] ?? null;
 			$wa->img = $data['img'] ?? null;
