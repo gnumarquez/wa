@@ -82,7 +82,7 @@ Class Whatsapp {
 					$wa->sender = $this->sender;
 					$wa->save();
 				} else {
-					$db = new DB($arr["db"], $arr["user"], $arr["pass"], $arr["host"]);
+					$db = new DB($this->arr["db"], $this->arr["user"], $this->arr["pass"], $this->arr["host"]);
 					$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status,sender) values (?,?,?,?,?,?,?,?)",[$this->telf,$this->txt,$this->img,$this->aud,$this->mp4,$this->pdf,$this->status,$this->sender]);
 				}
 				
@@ -140,7 +140,7 @@ Class Whatsapp {
 			$wa->status = 1;
 			$wa->save();
 		} else {
-			$db = new DB($arr["db"], $arr["user"], $arr["pass"], $arr["host"]);
+			$db = new DB($this->arr["db"], $this->arr["user"], $this->arr["pass"], $this->arr["host"]);
 			$db->run("insert into whatsapp(telf,txt,img,aud,mp4,pdf,status) values (?,?,?,?,?,?,?)",[$data['telf'],$data['txt'],$data['img'],$data['aud'],$data['mp4'],$data['pdf'],1]);
 		}
 			
