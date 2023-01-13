@@ -175,7 +175,8 @@ Class Whatsapp {
 
 		if(!is_dir(dirname($filename))) mkdir(dirname($filename).'/', 0777, TRUE);
 
-		file_put_contents($filename, file_get_contents($url));
+		//file_put_contents($filename, file_get_contents($url));
+		copy($url,$filename);
 
 		//\Storage::disk('public')->put($name,$contents);
 
