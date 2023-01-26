@@ -60,7 +60,7 @@ Class Whatsapp {
 				'pdf'=>$this->pdf
 			);
 			if ($this->btn){
-				$data['btn'] = $this->btn;
+				$data['btn'] = json_encode($this->btn);
 			}
 
 			$ch = curl_init();
