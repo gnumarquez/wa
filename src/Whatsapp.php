@@ -19,6 +19,7 @@ Class Whatsapp {
 	public $error = null;
 	public $apiKey = null;
 	public $status = 0;
+	public $btn = null;
 	private $save;
 	public $arr = null;
 
@@ -45,6 +46,7 @@ Class Whatsapp {
 		$number = PhoneNumber::parse($nume);
 
 		if ($this->status == "3") {
+			//esto es para comentarios
 			$this->result = json_encode(["error"=>0]);
 		} else {
 			$data = array(
@@ -57,6 +59,9 @@ Class Whatsapp {
 				'mp4'=>$this->mp4,
 				'pdf'=>$this->pdf
 			);
+			if ($this->btn){
+				$data['btn'] = $this->btn;
+			}
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL,"https://api.whatsapp506.biz/sendOne");
