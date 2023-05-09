@@ -82,6 +82,8 @@ Class Whatsapp {
 			curl_close ($ch);
 		}
 		
+		dump($http_code);
+		dump("BREAK");
 		
 		if ($http_code == 200) {
 			if ($this->save) {
