@@ -55,7 +55,7 @@ Class Whatsapp {
 			$data = array(
 				'api'=>$api,
 				'cod'=>$number->getCountryCode(),
-				'pho'=>$number->getNationalNumber(),
+				'telf'=>$this->telf,
 				'txt'=>$this->txt,
 				'img'=>$this->img,
 				'aud'=>$this->aud,
