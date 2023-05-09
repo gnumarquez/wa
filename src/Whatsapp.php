@@ -46,6 +46,8 @@ Class Whatsapp {
 		$nume = preg_replace("/^(?!\+)/","+",$this->telf);
 		$number = PhoneNumber::parse($nume);
 
+		$http_code = 200;
+
 		if ($this->status == "3") {
 			//esto es para comentarios
 			$this->result = json_encode(["error"=>0]);
@@ -76,11 +78,12 @@ Class Whatsapp {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$this->result = curl_exec ($ch);
+			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close ($ch);
 		}
 		
 		
-		if (json_decode($this->result,true)['error'] == 0) {
+		if ($http_code == 200) {
 			if ($this->save) {
 				if (!$this->arr) {
 					$wa = new \App\Models\WhatsappModel();
