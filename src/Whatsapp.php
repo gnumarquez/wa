@@ -54,7 +54,7 @@ Class Whatsapp {
 		} else {
 			$data = array(
 				'api'=>$api,
-				'cod'=>$number->getCountryCode(),
+				//'cod'=>$number->getCountryCode(),
 				'telf'=>$this->telf,
 				'txt'=>$this->txt,
 				'img'=>$this->img,
