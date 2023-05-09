@@ -9,6 +9,7 @@ use Gnumarquez\DB;
 Class Whatsapp {
 
 	public $telf = null;
+	public $cod = null;
 	public $txt = null;	
 	public $img = null;
 	public $pdf = null;
@@ -63,11 +64,11 @@ Class Whatsapp {
 				$data['btn'] = $this->btn;
 			}
 
-			$url = "https://api.whatsapp506.biz/sendOne";
-			if ($this->btn){
+			$url = "https://wapi.dsf.cr/sendwa";
+			/*if ($this->btn){
 				$data['btn'] = $this->btn;
 				$url = "https://api.whatsapp506.biz/sendOneBtn";
-			}
+			}*/
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL,$url);
