@@ -82,8 +82,7 @@ Class Whatsapp {
 			curl_close ($ch);
 		}
 		
-		dump($http_code);
-		dump("WM");
+		
 		if ($http_code == 200) {
 			if ($this->save) {
 				if (!$this->arr) {
@@ -105,7 +104,7 @@ Class Whatsapp {
 			}			
 			return true;
 		} else {
-			$error = [
+			/*$error = [
 				0 => "Mensaje enviado",
 				1 => "Api Key ausente",
 				2 => "Código Telefónico Internacional ausente",
@@ -122,9 +121,9 @@ Class Whatsapp {
 				61 => "Url de PDF no correcto",
 				62 => "Documento no PDF",
 				63 => "Documento demasiado grande"
-			];
-			$this->error = $error[json_decode($this->result,true)['error']];
-			error_log($this->telf." - ".$error[json_decode($this->result,true)['error']]);
+			];*/
+			$this->error = json_decode($this->result,true)['error'];
+			error_log($this->telf." - ".$this->error);
 			return false;
 		}
 	}
