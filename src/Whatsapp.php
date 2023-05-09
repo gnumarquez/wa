@@ -78,14 +78,11 @@ Class Whatsapp {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$this->result = curl_exec ($ch);
-			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close ($ch);
 		}
 		
-		dump($http_code);
-		dump("BREAK");
 		
-		if ($http_code == 200) {
+		if (!isset(json_decode($this->result,true)['error'])) {
 			if ($this->save) {
 				if (!$this->arr) {
 					$wa = new \App\Models\WhatsappModel();
@@ -106,24 +103,6 @@ Class Whatsapp {
 			}			
 			return true;
 		} else {
-			/*$error = [
-				0 => "Mensaje enviado",
-				1 => "Api Key ausente",
-				2 => "Código Telefónico Internacional ausente",
-				3 => "Número Telefónico ausente",
-				4 => "Texto, Imágen y PSD ausente",
-				10 => "Api Key incorrecta",
-				11 => "Sin saldo",
-				21 => "Código Telefónico Internacional no numérico",
-				31 => "Número Telefónico no numérico",
-				41 => "Texto demasiado largo",
-				51 => "Url de imágen no correcta",
-				52 => "Imágen no jpeg",
-				53 => "Tamaño imágen demasiado grande",
-				61 => "Url de PDF no correcto",
-				62 => "Documento no PDF",
-				63 => "Documento demasiado grande"
-			];*/
 			$this->error = json_decode($this->result,true)['error'];
 			error_log($this->telf." - ".$this->error);
 			return false;
