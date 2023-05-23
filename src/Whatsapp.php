@@ -54,10 +54,8 @@ Class Whatsapp {
 		} else {
 			$data = array(
 				'api'=>$api,
-				/*//'cod'=>$number->getCountryCode(),
-				'telf'=>$this->telf,*/
-				'cod'=>$number->getCountryCode(),
-				'pho'=>$number->getNationalNumber(),
+				//'cod'=>$number->getCountryCode(),
+				'telf'=>$this->telf,
 				'txt'=>$this->txt,
 				'img'=>$this->img,
 				'aud'=>$this->aud,
@@ -68,8 +66,8 @@ Class Whatsapp {
 				$data['btn'] = $this->btn;
 			}
 
-			//$url = "https://wapi.dsf.cr/sendwa";
-			$url = "https://api.whatsapp506.biz/sendOne";
+			$url = "https://wapi.dsf.cr/sendwa";
+			//$url = "https://api.whatsapp506.biz/sendOne";
 			/*if ($this->btn){
 				$data['btn'] = $this->btn;
 				$url = "https://api.whatsapp506.biz/sendOneBtn";
@@ -85,8 +83,8 @@ Class Whatsapp {
 		}
 		
 		
-		//if (!isset(json_decode($this->result,true)['error'])) {
-			if (json_decode($this->result,true)['error'] == 0) {
+		//if (!(json_decode($this->result,true)['error'])) {
+		if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
 				if (!$this->arr) {
 					$wa = new \App\Models\WhatsappModel();
