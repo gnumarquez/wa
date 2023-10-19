@@ -79,7 +79,14 @@ Class Whatsapp {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$this->result = curl_exec ($ch);
+			$httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close ($ch);
+		}
+
+		if ($this->result===false){
+			$this->error = $httpStatusCode;
+			error_log($this->telf." - statuscode ".$this->error);
+			return false;
 		}
 		
 		
