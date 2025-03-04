@@ -65,8 +65,9 @@ Class Whatsapp {
 			if ($this->btn){
 				$data['btn'] = $this->btn;
 			}
-
-			$url = "https://wapi.dsf.cr/sendwa";
+			//https://n8n.webhook.ssc.cr/webhook/evolution-webhook
+			//$url = "https://wapi.dsf.cr/sendwa";
+			$url = "https://n8n.webhook.ssc.cr/webhook/mandar-whatsapp";
 			//$url = "https://api.whatsapp506.biz/sendOne";
 			/*if ($this->btn){
 				$data['btn'] = $this->btn;
