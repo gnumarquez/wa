@@ -15,6 +15,7 @@ Class Whatsapp {
 	public $pdf = null;
 	public $aud = null;
 	public $mp4 = null;
+	public $url = null;
 	public $sender = null;
 	public $result = null;
 	public $error = null;
@@ -66,8 +67,11 @@ Class Whatsapp {
 				$data['btn'] = $this->btn;
 			}
 			//https://n8n.webhook.ssc.cr/webhook/evolution-webhook
-			//$url = "https://wapi.dsf.cr/sendwa";
-			$url = "https://n8n.webhook.ssc.cr/webhook/mandar-whatsapp";
+			$url = "https://wapi.dsf.cr/sendwa";
+			//$url = "https://n8n.webhook.ssc.cr/webhook/mandar-whatsapp";
+			if ($this->url) {
+				$url = $this->url;
+			}
 			//$url = "https://api.whatsapp506.biz/sendOne";
 			/*if ($this->btn){
 				$data['btn'] = $this->btn;
