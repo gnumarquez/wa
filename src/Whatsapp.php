@@ -96,7 +96,7 @@ Class Whatsapp {
 		
 		
 		//if (!(json_decode($this->result,true)['error'])) {
-		if (json_decode($this->result,true)['error'] == 0) {
+		//if (json_decode($this->result,true)['error'] == 0) {
 			if ($this->save) {
 				if (!$this->arr) {
 					$wa = new \App\Models\WhatsappModel();
@@ -116,11 +116,11 @@ Class Whatsapp {
 				
 			}			
 			return true;
-		} else {
+		/* } else {
 			$this->error = json_decode($this->result,true)['error'];
 			error_log($this->telf." - ".$this->error);
 			return false;
-		}
+		} */
 	}
 
 	public function receive($data,$url = null){
